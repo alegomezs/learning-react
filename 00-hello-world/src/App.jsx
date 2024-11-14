@@ -3,41 +3,47 @@ import "./App.css";
 import { TwitterFollowCard } from "./TwitterFollowCard";
 
 export function App() {
-  const formatUserName = (userName) => `@${userName}`;
   const [isFollowing, setIsFollowing] = useState(false);
-
-  /*
+  const formatUserName = (userName) => `@${userName}`;
   const users = [
     {
       userName: "_alegomezs",
       name: "Alejandro Gomez Santillan",
-      isFollowing: true,
+      isFollowing: false,
+    },
+    {
+      userName: "midudev",
+      name: "Miguel Ángel Durán",
+      isFollowing: false,
+    },
+    {
+      userName: "anzawadaniel",
+      name: "Anzawa Daniel José",
+      isFollowing: false,
+    },
+    {
+      userName: "fabpot",
+      name: "Fabien Potencier",
+      isFollowing: false,
     },
   ];
-  */
 
   return (
     <section className="App">
       <h3>You might like</h3>
-      <TwitterFollowCard
-        formatUserName={formatUserName}
-        initialIsFollowing={isFollowing}
-        userName="_alegomezs"
-      >
-        Alejandro Gomez Santillan
-      </TwitterFollowCard>
-      <TwitterFollowCard formatUserName={formatUserName} userName="midudev">
-        Miguel Ángel Durán
-      </TwitterFollowCard>
-      <TwitterFollowCard
-        formatUserName={formatUserName}
-        userName="anzawadaniel"
-      >
-        Anzawa Daniel José
-      </TwitterFollowCard>
-      <TwitterFollowCard formatUserName={formatUserName} userName="fabpot">
-        Fabien Potencier
-      </TwitterFollowCard>
+      {users.map((user) => {
+        const { userName, name, isFollowing } = user;
+        return (
+          <TwitterFollowCard
+            key={userName}
+            formatUserName={formatUserName}
+            initialIsFollowing={isFollowing}
+            userName={userName}
+          >
+            {name}
+          </TwitterFollowCard>
+        );
+      })}
     </section>
   );
 }
